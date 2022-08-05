@@ -10,7 +10,7 @@ const ResetPasswordScreen = ({ history }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const URL = "http://localhost:4000"
+  const URL = "https://login-signup-bk.herokuapp.com"
 
 
   const resetPasswordHandler = async (e) => {

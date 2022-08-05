@@ -6,7 +6,7 @@ const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const URL = "http://localhost:4000"
+  const URL = "https://login-signup-bk.herokuapp.com"
   const forgotPasswordHandler = async (e) => {
     e.preventDefault();
 

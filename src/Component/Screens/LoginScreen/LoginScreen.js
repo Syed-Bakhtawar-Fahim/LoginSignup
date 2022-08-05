@@ -27,7 +27,7 @@ const LoginScreen = ({ history }) => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/auth/login",
+        "https://login-signup-bk.herokuapp.com/api/auth/login",
         { email, password },
         config
       );

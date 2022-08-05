@@ -7,7 +7,7 @@ const PrivateScreen = () => {
   let navigate = useNavigate();
   const [error, setError] = useState("");
   const [privateData, setPrivateData] = useState("");
-  const URL = "http://localhost:4000"
+  const URL = "https://login-signup-bk.herokuapp.com"
 
 // console.log(localStorage.getItem("authToken"))
   useEffect(() => {
