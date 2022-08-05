@@ -24,6 +24,17 @@ app.use(errorHandler)
 // Port
 const PORT = process.env.PORT || 4000;
 
+// Boiler Plate Code
+app.get('/', (req, res) => {
+    res.send('Hi I am the Server Of Login-signup developed by Syed Bakhtawar Fahim')
+})
+app.get('/home', (req, res) => {
+    res.send('I am the Home Page Of Login-signup developed by Syed Bakhtawar Fahim')
+})
+app.get('*', (req, res) => {
+    res.send('Hi I am the Server Of Login-signup developed by Syed Bakhtawar Fahim')
+})
+
 // Server listing
 const server = app.listen(PORT, () => console.log(`Server is running on ${PORT}`) )
 
