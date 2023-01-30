@@ -4,7 +4,8 @@
   "description": "",
   "main": "backend/server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "./node_modules/.bin/netfily-lambda serve ",
+    "build": "./node_modules/.bin/netfily-lambda build ",
     "server": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +19,10 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.0",
     "morgan": "^1.10.0",
+    "netlify-lambda": "^2.0.15",
     "nodemailer": "^6.7.7",
     "nodemailer-smtp-transport": "^2.7.4",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "serverless-http": "^3.1.1"
   }
 }

@@ -15,8 +15,8 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan('short'))
 
-app.use("/api/auth", require("./routes/auth"))
-app.use("/api/private", require("./routes/private"))
+app.use("/.netlify/functions/api", require("./routes/auth"))
+app.use("/.netlify/functions/api/private", require("./routes/private"))
 
 // Error Handler (should be last piece of middlewear)
 app.use(errorHandler)
