@@ -4,8 +4,8 @@
   "description": "",
   "main": "backend/server.js",
   "scripts": {
-    "start": "./node_modules/.bin/netfily-lambda serve ",
-    "build": "./node_modules/.bin/netfily-lambda build ",
+    "start": "./node_modules/.bin/netfily-lambda serve server",
+    "build": "./node_modules/.bin/netfily-lambda build server",
     "server": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
