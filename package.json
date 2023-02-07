@@ -4,10 +4,7 @@
   "description": "",
   "main": "backend/server.js",
   "scripts": {
-    "start": "./node_modules/.bin/netfily-lambda serve server",
-    "build": "./node_modules/.bin/netfily-lambda build server",
-    "server": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "netlify deploy --prod"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +16,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.0",
     "morgan": "^1.10.0",
+    "netlify-cli": "^12.10.0",
     "netlify-lambda": "^2.0.15",
     "nodemailer": "^6.7.7",
     "nodemailer-smtp-transport": "^2.7.4",
