@@ -1,0 +1,35 @@
+
+// Private Route
+// import PrivateRoute from './Component/Routing/PrivateRoute';
+// Screen
+
+     {/* <PrivateRoute exact path="/" element={<PrivateScreen />} /> */}
+      {/* <PrivateRoute exact path = "/" element = {<Hello />} /> */}
+      {/* <PrivateRoute exact path = "/" element = {<ProtectedRoutes Component = {Hello} />} /> */}
+      {/* <Route exact path="/" element= {<PrivateScreen />} /> */}
+      {/* <Route exact path="/" element={<Hello />} /> */}
+      {/* <Route to = "" element{<PrivateRoute
+      component={<Home />}
+        
+
+      />}/> */}
+      {/* <Route element={<ProtectedRoutes />}>
+          <Route exact path="/" element={<Hello />} />
+        </Route> */}
+
+
+      {/* <Route exact path="/" element={<Hello />} /> */}
+
+      //  error ? (
+  // <>
+  //     <span className="error-message">{error}
+  //       <div>
+  //         <Link to="/login" className="login_btn">Login</Link>
+  //       </div></span>
+
+  //   </>
+  // ) : (
+  //   <>
+  //     <div style={{ background: "green", color: "white" }}>{privateData}</div>
+  //     <button onClick={logoutHandler}>Logout</button>
+  //   </>

@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./LoginScreen.css";
+import { toast } from "react-toastify";
 
 const LoginScreen = ({ history }) => {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const URL = "http://localhost:8000"
 
   useEffect(() => {
-    if(localStorage.getItem("authToken")) {
+    if (localStorage.getItem("authToken")) {
       // history.push("/");
       navigate("/", { replace: true });
     }
@@ -18,7 +20,7 @@ const LoginScreen = ({ history }) => {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    
+
     const config = {
       header: {
         "Content-Type": "application/json",
@@ -27,21 +29,30 @@ const LoginScreen = ({ history }) => {
 
     try {
       const { data } = await axios.post(
-        "https://login-signup-bk.herokuapp.com/api/auth/login",
+        `${URL}/api/v1/login`,
         { email, password },
         config
       );
+      // "https://login-signup-bk.herokuapp.com/api/auth/login",
 
       localStorage.setItem("authToken", data.token);
 
       // history.push("/");
       navigate("/", { replace: true });
+      toast.success(`Welcome ${email}`, {
+        toastId: "success",
+        autoClose: 4000,
+      });
     } catch (error) {
       setError(error.response.data.error);
       setPassword("")
-      setTimeout(() => {
-        setError("");
-      }, 5000);
+      // setTimeout(() => {
+      //   setError("");
+      // }, 5000);
+      toast.error("Something went wrong. Please try again", {
+        toastId: "error",
+        autoClose: 4000,
+      });
     }
   };
 

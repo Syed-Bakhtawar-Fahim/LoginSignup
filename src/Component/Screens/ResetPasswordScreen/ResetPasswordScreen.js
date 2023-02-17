@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from "axios";
-
 import "./ResetPasswordScreen.css";
 
 const ResetPasswordScreen = ({ history }) => {
-  const params=useParams()
+  const params = useParams()
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const URL = "https://login-signup-bk.herokuapp.com"
+  // const URL = "http://localhost:4000"
+  const URL = "http://localhost:8000"
 
 
   const resetPasswordHandler = async (e) => {
@@ -25,30 +25,41 @@ const ResetPasswordScreen = ({ history }) => {
     if (password !== confirmPassword) {
       setPassword("");
       setConfirmPassword("");
-      setTimeout(() => {
-        setError("");
-      }, 5000);
-      return setError("Passwords don't match");
+      toast.error("Password does not match", {
+        toastId: "error",
+        autoClose: 4000,
+      });
     }
 
     try {
       const { data } = await axios
-      .put(
-        `${URL}/api/auth/resetpassword/${params.resetToken}`,
-        {
-          password,
-        },
-        config
-      );
+        .put(
+          `${URL}/api/v1/resetpassword/${params.resetToken}`,
+          {
+            password,
+            confirmPassword
+          },
+          config
+        );
 
       console.log(data);
+      // setSuccess(data.data);
       setSuccess(data.data);
-    } catch (error) {
+      toast.success("Password reset successfully", {
+        toastId: "success",
+        autoClose: 4000,
+      });
+      setPassword("")
+      setConfirmPassword("")
+    }
+    catch (error) {
       console.log(error)
-      // setError(error);
-      setTimeout(() => {
-        setError("");
-      }, 5000);
+      setPassword("")
+      setConfirmPassword("")
+      toast.error("Something went wrong. Please try again", {
+        toastId: "error",
+        autoClose: 4000,
+      });
     }
   };
 
@@ -59,7 +70,7 @@ const ResetPasswordScreen = ({ history }) => {
         className="resetpassword-screen__form"
       >
         <h3 className="resetpassword-screen__title">Forgot Password</h3>
-        {error && <span className="error-message">{error} </span>}
+        {/* {error && <span className="error-message">{error} </span>} */}
         {success && (
           <span className="success-message">
             {success} <Link to="/login" className="login_btn">Login</Link>

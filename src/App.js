@@ -1,23 +1,24 @@
 import React from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
-
-// Private Route
-// import PrivateRoute from './Component/Routing/PrivateRoute';
-
-// Screen
-import PrivateScreen from './Component/Screens/PrivateScreen/PrivateScreen';
 import LoginScreen from './Component/Screens/LoginScreen/LoginScreen';
 import RegisterScreen from './Component/Screens/RegisterScreen/RegisterScreen';
 import ResetPasswordScreen from './Component/Screens/ResetPasswordScreen/ResetPasswordScreen';
 import ForgotPasswordScreen from './Component/Screens/ForgotPasswordScreen/ForgotPasswordScreen';
+import Hello from './Container/Hello/Hello';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import ProtectedRoutes from './Component/Routing/protectedRoutes';
+
 
 function App() {
   return (
     <>
-        {/* <PrivateRoute exact path="/" element={<PrivateScreen />} /> */}
+      <ToastContainer />
       <Routes>
-        <Route exact path="/" element= {<PrivateScreen />} />
+      {/* Private Routes */}
+      <Route path = "/" element = {<ProtectedRoutes Component = {Hello} />} /> 
+        {/* Public Routes */}
         <Route path="/login" element={<LoginScreen />} />
         <Route path='/register' element={<RegisterScreen />} />
         <Route path='/forgotpassword' element={<ForgotPasswordScreen />} />

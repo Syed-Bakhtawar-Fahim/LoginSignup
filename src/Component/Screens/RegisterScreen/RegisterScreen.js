@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate  } from 'react-router-dom'
-
+import { toast } from 'react-toastify'
 import "./RegisterScreen.css"
 
 
 const RegisterScreen = ({ history }) => {
   let navigate = useNavigate();
-  const [username, setUsername] = useState("")
+  const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
-  const URL = "https://login-signup-bk.herokuapp.com"
+  // const URL = "https://login-signup-bk.herokuapp.com"
+  const URL = "http://localhost:8000"
 
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
@@ -41,27 +42,34 @@ const RegisterScreen = ({ history }) => {
 
     try {
       const { data } = await axios.post(
-        `${URL}/api/auth/register`,
+        `${URL}/api/v1/register`,
         {
-          username,
+          name,
           email,
-          password
+          password,
+          confirmPassword
         },  config )
 
       localStorage.getItem("authToken", data.token)
       navigate("/login");
       // history.push("/")
+      toast.success(`Welcome ${name}. Please login to continue`, {
+        toastId: "success",
+        autoClose: 4000,
+      });
 
     }
     catch (error) {
       // setError(error.response.data.error)
-      setError("Please try again or password should atleast of 6 character")
-      setTimeout(() => {
-        setError("")
-      }, 5000);
+      // setError("Please try again or password should atleast of 6 character")
+      toast.error("Please try again or password should atleast of 6 character", {
+        toastId: "error",
+        autoClose: 4000,
+      });
+      // setTimeout(() => {
+      //   setError("")
+      // }, 5000);
     }
-
-
   }
 
 
@@ -78,8 +86,8 @@ const RegisterScreen = ({ history }) => {
               required
               id="name"
               placeholder="Enter username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="form-group">

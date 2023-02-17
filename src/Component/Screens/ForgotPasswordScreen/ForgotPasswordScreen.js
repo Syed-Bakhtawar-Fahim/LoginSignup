@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import "./ForgotPasswordScreen.css";
+import { toast } from "react-toastify";
+
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const URL = "https://login-signup-bk.herokuapp.com"
+  // const URL = "http://localhost:4000"
+  const URL = "http://localhost:8000"
   const forgotPasswordHandler = async (e) => {
     e.preventDefault();
 
@@ -18,18 +19,24 @@ const ForgotPasswordScreen = () => {
 
     try {
       const { data } = await axios.post(
-        `${URL}/api/auth/forgotpassword`,
+        `${URL}/api/v1/forgotpassword`,
         { email },
         config
       );
-
-      setSuccess(data.data);
+        // console.log(data)
+      // setSuccess(data.data);
+      toast.success("Email sent", {
+        toastId: "success1",
+        autoClose: 4000,
+      });
+      setEmail("")
     } catch (error) {
-      setError(error.response.data.error);
+      // setError(error.response.data.error);
       setEmail("");
-      setTimeout(() => {
-        setError("");
-      }, 5000);
+      toast.error("Email not found in our records", {
+        toastId: "error",
+        autoClose: 4000,
+      });
     }
   };
 
@@ -40,8 +47,8 @@ const ForgotPasswordScreen = () => {
         className="forgotpassword-screen__form"
       >
         <h3 className="forgotpassword-screen__title">Forgot Password</h3>
-        {error && <span className="error-message">{error}</span>}
-        {success && <span className="success-message">{success}</span>}
+        {/* {error && <span className="error-message">{error}</span>} */}
+        {/* {success && <span className="success-message">{success}</span>} */}
         <div className="form-group">
           <p className="forgotpassword-screen__subtext">
             Please enter the email address you register your account with. We
@@ -57,7 +64,7 @@ const ForgotPasswordScreen = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" >
           Send Email
         </button>
       </form>

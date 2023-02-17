@@ -7,11 +7,8 @@ const PrivateScreen = () => {
   let navigate = useNavigate();
   const [error, setError] = useState("");
   const [privateData, setPrivateData] = useState("");
-  const URL = "https://login-signup-bk.herokuapp.com"
-
-// console.log(localStorage.getItem("authToken"))
+  const URL = "http://localhost:8000"
   useEffect(() => {
-  
     const fetchPrivateDate = async () => {
       const config = {
         headers: {
@@ -21,9 +18,10 @@ const PrivateScreen = () => {
       };
 
       try {
-        const { data } = await axios.get(`${URL}/api/private`, config);
+        const { data } = await axios.get(`${URL}/api/v1/`, config);
         setPrivateData(data.data);
-      } 
+        console.log(data.data)        
+      }
       catch (error) {
         localStorage.removeItem("authToken");
         setError("You are not authorized please login");
@@ -42,10 +40,10 @@ const PrivateScreen = () => {
   return error ? (
     <>
       <span className="error-message">{error}
-      <div>
-        <Link to="/login" className="login_btn">Login</Link>
-      </div></span>
-      
+        <div>
+          <Link to="/login" className="login_btn">Login</Link>
+        </div></span>
+
     </>
   ) : (
     <>
